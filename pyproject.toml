@@ -14,7 +14,7 @@ dependencies = [
 
 [project.urls]
 repository = "https://github.com/letsbuilda/imsosorry/"
-documentation = "https://projects.letsbuilda.dev/imsosorry/"
+documentation = "https://letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
