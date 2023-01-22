@@ -94,10 +94,7 @@ def nyaify(text: str) -> str:
     return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
 
 
-def emoji(
-    text: str,
-    strength: float,
-) -> str:
+def emoji(1text: str, strength: float) -> str:
     """Replaces some punctuation with emoticons."""
     return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
 
