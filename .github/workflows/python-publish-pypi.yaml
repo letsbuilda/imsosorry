@@ -1,0 +1,10 @@
+name: Python - Publish to PyPI
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  publish:
+    uses: darbiadev/.github/.github/workflows/python-pypi-publish.yaml@main
+    secrets: inherit
