@@ -1,0 +1,10 @@
+name: GitHub Pages - Python Sphinx
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@main
