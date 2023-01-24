@@ -121,7 +121,7 @@ def tildify(text: str, strength: float) -> str:
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
-def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 0.1, tilde_strength: float = 1) -> str:
+def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 0.1, tilde_strength: float = 0.1) -> str:
     """Takes a string and returns an uwuified version of it."""
     text = text.lower()
     text = word_replace(text)
@@ -131,6 +131,3 @@ def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 
     text = emoji(text, emoji_strength)
     text = tildify(text, tilde_strength)
     return text
-
-
-print(uwuify("Hello, world!"))
