@@ -110,6 +110,7 @@ def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
 
 
 def tildes(match: re.Match, strength: float = 0.0):
+    """Adds some tildes to spaces."""
     match_string = match.group()
     if random.random() < strength:
         return "~"
@@ -121,7 +122,13 @@ def tildify(text: str, strength: float) -> str:
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
-def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 0.1, tilde_strength: float = 0.1) -> str:
+def uwuify(
+    text: str,
+    *,
+    stutter_strength: float = 0.2,
+    emoji_strength: float = 0.1,
+    tilde_strength: float = 0.1,
+) -> str:
     """Takes a string and returns an uwuified version of it."""
     text = text.lower()
     text = word_replace(text)
