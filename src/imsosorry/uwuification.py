@@ -57,6 +57,8 @@ REGEX_WORD_REPLACE = re.compile(r"(?<!w)[lr](?!w)")
 
 REGEX_PUNCTUATION = re.compile(r"[.!?\r\n\t]")
 
+REGEX_TILDE = re.compile(r"(?![^ ])(?<!\B)")
+
 REGEX_STUTTER = re.compile(r"(\s)([a-zA-Z])")
 SUBSTITUTE_STUTTER = r"\g<1>\g<2>-\g<2>"
 
@@ -107,7 +109,26 @@ def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
     return match_string
 
 
-def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 0.1) -> str:
+def tildes(match: re.Match, strength: float = 0.0):
+    """Adds some tildes to spaces."""
+    match_string = match.group()
+    if random.random() < strength:
+        return "~"
+    return match_string
+
+
+def tildify(text: str, strength: float) -> str:
+    """Adds some tildes to spaces."""
+    return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
+
+
+def uwuify(
+    text: str,
+    *,
+    stutter_strength: float = 0.2,
+    emoji_strength: float = 0.1,
+    tilde_strength: float = 0.1,
+) -> str:
     """Takes a string and returns an uwuified version of it."""
     text = text.lower()
     text = word_replace(text)
@@ -115,4 +136,5 @@ def uwuify(text: str, *, stutter_strength: float = 0.2, emoji_strength: float = 
     text = char_replace(text)
     text = stutter(text, stutter_strength)
     text = emoji(text, emoji_strength)
+    text = tildify(text, tilde_strength)
     return text
