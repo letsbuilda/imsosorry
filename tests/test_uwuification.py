@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from unittest import mock
+
 import pytest
 
 from imsosorry.uwuification import EMOJIS, emoji, word_replace
@@ -18,6 +20,7 @@ def test_word_replace(in_text: str, out_text: str) -> None:
     assert word_replace(in_text) == out_text
 
 
+@mock.patch('random.choice', return_value="UwU")
 @pytest.mark.parametrize(
     "strength,has_emoji",
     [
