@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := install-dev
 
+default: init install-dev
+
 .PHONY: init
 init:
 	python -m pip install --upgrade pip wheel setuptools build
