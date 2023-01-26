@@ -78,11 +78,6 @@ def char_replace(text: str) -> str:
     return REGEX_WORD_REPLACE.sub("w", text)
 
 
-def stutter(text: str, strength: float) -> str:
-    """Adds stuttering to a string."""
-    return REGEX_STUTTER.sub(partial(stutter_replace, strength=strength), text, 0)
-
-
 def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
     """Replaces a single character with a stuttered character."""
     match_string = match.group()
@@ -91,14 +86,14 @@ def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
     return match_string
 
 
+def stutter(text: str, strength: float) -> str:
+    """Adds stuttering to a string."""
+    return REGEX_STUTTER.sub(partial(stutter_replace, strength=strength), text, 0)
+
+
 def nyaify(text: str) -> str:
     """Nyaifies a string by adding a 'y' between an 'n' and a vowel."""
     return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
-
-
-def emoji(text: str, strength: float) -> str:
-    """Replaces some punctuation with emoticons."""
-    return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
 
 
 def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
@@ -107,6 +102,11 @@ def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
     if random.random() < strength:
         return f" {random.choice(EMOJIS)} "
     return match_string
+
+
+def emoji(text: str, strength: float) -> str:
+    """Replaces some punctuation with emoticons."""
+    return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
 
 
 def tildes(match: re.Match, strength: float = 0.0):
