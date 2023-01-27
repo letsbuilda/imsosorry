@@ -1,6 +1,6 @@
 [project]
 name = "imsosorry"
-version = "1.0.0"
+version = "1.1.0"
 description = "Sometimes it can be necessary to call upon the ancient arts..."
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
@@ -14,7 +14,7 @@ dependencies = [
 
 [project.urls]
 repository = "https://github.com/letsbuilda/imsosorry/"
-documentation = "https://letsbuilda.dev/imsosorry/"
+documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
