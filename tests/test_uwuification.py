@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from imsosorry.uwuification import EMOJIS, emoji, word_replace
+from imsosorry.uwuification import EMOJIS, emoji, word_replace, tildify
 
 
 @pytest.mark.parametrize(
@@ -28,3 +28,14 @@ def test_word_replace(in_text: str, out_text: str) -> None:
 def test_emoji(strength: float, has_emoji: bool) -> None:
     output = emoji("I love dogs!", strength)
     assert any(emoji_ in output for emoji_ in EMOJIS) == has_emoji
+
+
+@pytest.mark.parametrize(
+    "strength,in_text,out_text",
+    [
+        (0.0, "cats are small", "cats are small"),
+        (1.0, "I love dogs", "I~ love~ dogs~"),
+    ],
+)
+def test_tildify(strength: float, in_text: str, out_text: str):
+    assert tildify(in_text, strength) == out_text
