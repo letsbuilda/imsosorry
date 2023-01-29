@@ -4,6 +4,11 @@
 Changelog
 =========
 
+
+- :release:`1.2.0 <29th January 2023>`
+- :feature:`18` Add ``uwuify`` to top level package exports
+
+
 - :release:`1.1.0 <25th January 2023>`
 - :feature:`11` Uwuification: replace spaces with tildes
 
