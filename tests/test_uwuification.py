@@ -41,4 +41,4 @@ def test_emoji(strength: float, has_emoji: bool) -> None:
     ],
 )
 def test_tildify(strength: float, in_text: str, out_text: str):
-    assert tildify(strength, in_text) == out_text
+    assert tildify(in_text, strength) == out_text
