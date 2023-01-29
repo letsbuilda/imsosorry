@@ -1,6 +1,6 @@
 [project]
 name = "imsosorry"
-version = "1.1.0"
+version = "1.2.0"
 description = "Sometimes it can be necessary to call upon the ancient arts..."
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
