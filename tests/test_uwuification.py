@@ -34,7 +34,7 @@ def test_emoji(strength: float, has_emoji: bool) -> None:
 
 
 @pytest.mark.parametrize(
-    "weight,in_text,out_text",
+    "strength,in_text,out_text",
     [
         (0.0, "cats are small", "cats are small"),
         (1.0, "I love dogs", "I~ love~ dogs~"),
