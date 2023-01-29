@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from imsosorry.uwuification import EMOJIS, emoji, word_replace, tildify
+from imsosorry.uwuification import EMOJIS, char_replace, emoji, nyaify, stutter, tildify, word_replace
 
 
 @pytest.mark.parametrize(
@@ -16,6 +16,45 @@ from imsosorry.uwuification import EMOJIS, emoji, word_replace, tildify
 )
 def test_word_replace(in_text: str, out_text: str) -> None:
     assert word_replace(in_text) == out_text
+
+
+@pytest.mark.parametrize(
+    "in_text,out_text",
+    [
+        ("look", "wook"),
+        ("rook", "wook"),
+        ("wrong", "wrong"),
+        ("lr", "ww"),
+        ("rl", "ww"),
+        ("wrl", "wrw"),
+        ("rlw", "wlw"),
+        ("wrlw", "wrlw"),
+    ],
+)
+def test_char_replace(in_text: str, out_text: str):
+    assert char_replace(in_text) == out_text
+
+
+@pytest.mark.parametrize(
+    "strength,in_text,out_text",
+    [
+        (0.0, "cats are small", "cats are small"),
+        (1.0, "I love dogs", "I l-love d-dogs"),
+    ],
+)
+def test_stutter(strength: float, in_text: str, out_text: str):
+    assert stutter(in_text, strength) == out_text
+
+
+@pytest.mark.parametrize(
+    "in_text,out_text",
+    [
+        ("naa", "naa"),
+        ("nan", "nyan"),
+    ],
+)
+def test_nyaify(in_text: str, out_text: str):
+    assert nyaify(in_text) == out_text
 
 
 @pytest.mark.parametrize(
