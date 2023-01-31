@@ -65,12 +65,14 @@ REGEX_TILDE = re.compile(r"(?![^ ])(?<!\B)")
 """A regex to find places to add tildes (~) to."""
 
 REGEX_STUTTER = re.compile(r"(\s)([a-zA-Z])")
+"""A regex to find words to stutter."""
 SUBSTITUTE_STUTTER = r"\g<1>\g<2>-\g<2>"
-"""Regexes to add st-stuttering to strings."""
+"""A regex to add st-stuttering to strings."""
 
 REGEX_NYA = re.compile(r"n([aeou][^aeiou])")
+"""A regex to detect words with an n before a vowel to nyaify."""
 SUBSTITUTE_NYA = r"ny\1"
-"""Regexes to nyaify words."""
+"""A regex to to nyaify words."""
 
 
 def word_replace(text: str) -> str:
