@@ -17,6 +17,7 @@ WORD_REPLACE = {
     "meow": "nya~",
     "roar": "rawrr~",
 }
+"""A dict to match certain words for replacement words"""
 
 EMOJIS = [
     "rawr x3",
@@ -52,18 +53,24 @@ EMOJIS = [
     "/(^•ω•^)",
     "(✿oωo)",
 ]
+"""A list of emojis/emoticons to add."""
 
 REGEX_WORD_REPLACE = re.compile(r"(?<!w)[lr](?!w)")
+"""A wegex that to detect certain characters to change to "w"s."""
 
 REGEX_PUNCTUATION = re.compile(r"[.!?\r\n\t]")
+"""A regex to detect certain punctuation characters to emotify /(^•ω•^)"""
 
 REGEX_TILDE = re.compile(r"(?![^ ])(?<!\B)")
+"""A regex to find places to add tildes (~) to."""
 
 REGEX_STUTTER = re.compile(r"(\s)([a-zA-Z])")
 SUBSTITUTE_STUTTER = r"\g<1>\g<2>-\g<2>"
+"""Regexes to add st-stuttering to strings."""
 
 REGEX_NYA = re.compile(r"n([aeou][^aeiou])")
 SUBSTITUTE_NYA = r"ny\1"
+"""Regexes to nyaify words."""
 
 
 def word_replace(text: str) -> str:
