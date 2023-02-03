@@ -80,7 +80,7 @@ def word_replace(text: str, tilde_strength: int) -> str:
     for word, replacement in WORD_REPLACE.items():
         text = text.replace(word, replacement)
 
-    text = tildify(text, tilde_strength*1.5)
+    text = tildify(text, tilde_strength * 1.5)
     return text
 
 
