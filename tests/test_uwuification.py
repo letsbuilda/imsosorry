@@ -15,7 +15,7 @@ from imsosorry.uwuification import EMOJIS, char_replace, emoji, nyaify, stutter,
     ],
 )
 def test_word_replace(in_text: str, out_text: str) -> None:
-    assert word_replace(in_text) == out_text
+    assert word_replace(in_text, 0) == out_text
 
 
 @pytest.mark.parametrize(
