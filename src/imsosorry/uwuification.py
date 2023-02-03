@@ -75,10 +75,12 @@ SUBSTITUTE_NYA = r"ny\1"
 """A regex to to nyaify words."""
 
 
-def word_replace(text: str) -> str:
+def word_replace(text: str, tilde_strength: int) -> str:
     """Replaces words that are keys in the word replacement hash to the values specified."""
     for word, replacement in WORD_REPLACE.items():
         text = text.replace(word, replacement)
+
+    text = tildify(text, tilde_strength*1.5)
     return text
 
 
@@ -136,11 +138,11 @@ def uwuify(
     *,
     stutter_strength: float = 0.2,
     emoji_strength: float = 0.1,
-    tilde_strength: float = 0.1,
+    tilde_strength: float = 0.06,
 ) -> str:
     """Takes a string and returns an uwuified version of it."""
     text = text.lower()
-    text = word_replace(text)
+    text = word_replace(text, tilde_strength)
     text = nyaify(text)
     text = char_replace(text)
     text = stutter(text, stutter_strength)
