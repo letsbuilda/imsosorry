@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import random
 import re
-from functools import partial
+from typing import Callable
 
-WORD_REPLACE = {
+_WORD_REPLACE = {
     "small": "smol",
     "cute": "kawaii~",
     "fluff": "floof",
@@ -19,7 +19,7 @@ WORD_REPLACE = {
 }
 """A dict to match certain words for replacement words"""
 
-EMOJIS = [
+_EMOJIS = [
     "rawr x3",
     "OwO",
     "UwU",
@@ -55,95 +55,46 @@ EMOJIS = [
 ]
 """A list of emojis/emoticons to add."""
 
-REGEX_WORD_REPLACE = re.compile(r"(?<!w)[lr](?!w)")
-"""A wegex that to detect certain characters to change to "w"s."""
 
-REGEX_PUNCTUATION = re.compile(r"[.!?\r\n\t]")
-"""A regex to detect certain punctuation characters to emotify /(^•ω•^)"""
-
-REGEX_TILDE = re.compile(r"(?![^ ])(?<!\B)")
-"""A regex to find places to add tildes (~) to."""
-
-REGEX_STUTTER = re.compile(r"(\s)([a-zA-Z])")
-"""A regex to find words to stutter."""
-SUBSTITUTE_STUTTER = r"\g<1>\g<2>-\g<2>"
-"""A regex to add st-stuttering to strings."""
-
-REGEX_NYA = re.compile(r"n([aeou][^aeiou])")
-"""A regex to detect words with an n before a vowel to nyaify."""
-SUBSTITUTE_NYA = r"ny\1"
-"""A regex to to nyaify words."""
+Dice = Callable[[], bool]
 
 
-def word_replace(text: str) -> str:
-    """Replaces words that are keys in the word replacement hash to the values specified."""
-    for word, replacement in WORD_REPLACE.items():
-        text = text.replace(word, replacement)
-    return text
-
-
-def char_replace(text: str) -> str:
-    """Replace certain characters with 'w'."""
-    return REGEX_WORD_REPLACE.sub("w", text)
-
-
-def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
-    """Replaces a single character with a stuttered character."""
-    match_string = match.group()
-    if random.random() < strength:
-        return f"{match_string}-{match_string[-1]}"  # Stutter the last character
-    return match_string
-
-
-def stutter(text: str, strength: float) -> str:
-    """Adds stuttering to a string."""
-    return REGEX_STUTTER.sub(partial(stutter_replace, strength=strength), text, 0)
-
-
-def nyaify(text: str) -> str:
-    """Nyaifies a string by adding a 'y' between an 'n' and a vowel."""
-    return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
-
-
-def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
-    """Replaces a punctuation character with an emoticon."""
-    match_string = match.group()
-    if random.random() < strength:
-        return f" {random.choice(EMOJIS)} "
-    return match_string
-
-
-def emoji(text: str, strength: float) -> str:
-    """Replaces some punctuation with emoticons."""
-    return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
-
-
-def tildes(match: re.Match, strength: float = 0.0):
-    """Adds some tildes to spaces."""
-    match_string = match.group()
-    if random.random() < strength:
-        return "~"
-    return match_string
-
-
-def tildify(text: str, strength: float) -> str:
-    """Adds some tildes to spaces."""
-    return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
+def random_dice(strength: float) -> Dice:
+    return lambda: random.random() < strength
 
 
 def uwuify(
     text: str,
     *,
-    stutter_strength: float = 0.2,
-    emoji_strength: float = 0.1,
-    tilde_strength: float = 0.1,
+    stutter: Dice = random_dice(0.2),
+    emojis: Dice = random_dice(0.1),
+    tilde: Dice = random_dice(0.1),
 ) -> str:
-    """Takes a string and returns an uwuified version of it."""
     text = text.lower()
-    text = word_replace(text)
-    text = nyaify(text)
-    text = char_replace(text)
-    text = stutter(text, stutter_strength)
-    text = emoji(text, emoji_strength)
-    text = tildify(text, tilde_strength)
+
+    for word, replacement in _WORD_REPLACE.items():
+        text = text.replace(word, replacement)
+
+    pattern: str
+    for pattern, replacer in [
+        # name -> nyame
+        (r"n([aeou][^aeiou])", r"ny\1"),
+
+        # crabs crawl -> cwabs cwawl
+        (r"(?<!w)[lr](?!w)", "w"),
+
+        # stutter some words:
+        # a nice kitten -> a n-nice k-kitten
+        (r"(\s)([a-zA-Z])", lambda s: f"{s[0]}-{s[2]}" if stutter() else s[0]),
+
+        # w-why not spwinkwe in some emojis (owo)
+        # would y-you go out with me? -> would y-you go out with me >w<
+        (r"[.!?\n]", lambda s: f" {random.choice(_EMOJIS)} " if emojis() else s[0]),
+
+        # add a tilde at the end of some words:
+        # hewwo wowld nifty-fifty! uwu -> hewwo~ wowld~ nifty-fifty! uwu~
+        (r"\b(?=\s|$)", lambda _: "~" if tilde() else ""),
+    ]:
+        text = re.sub(pattern, replacer, text)
+
     return text
