@@ -98,4 +98,3 @@ function uwuify(
 
     return text
 }
-console.log(uwuify("hello. hello. hello. hello. hello. hello. hello. hello. hello. hello. hello. hello. hello. hello hello hello hello hello hello hello"))
