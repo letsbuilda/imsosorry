@@ -11,9 +11,9 @@ jobs:
 
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v3
+        uses: actions/checkout@27135e314dd1818f797af1db9dae03a9f045786b
 
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v3
         with:
-          config-file: darbiadev/.github/.github/dependency-review-config.yaml@main
+          config-file: darbiadev/.github/.github/dependency-review-config.yaml@e3fb5152be474702523c77d8f5ecd4c0a5bde872
