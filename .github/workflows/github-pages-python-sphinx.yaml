@@ -1,10 +1,16 @@
-name: GitHub Pages - Python Sphinx
+name: "GitHub Pages - Python Sphinx"
 
 on:
   push:
     branches:
       - main
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   docs:
-    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@main
+    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@c194ec59628447c17718ee155e52060ef92dc406
