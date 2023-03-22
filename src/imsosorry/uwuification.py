@@ -78,9 +78,7 @@ class Uwuified:
     ]
     """A list of emojis/emoticons to add."""
 
-    def __init__(
-        self, text, stutter_strength=0.2, emoji_strength=0.1, tilde_strength=0.1
-    ):
+    def __init__(self, text, stutter_strength=0.2, emoji_strength=0.1, tilde_strength=0.1):
         self.__original = text
         self.__text = text.lower()
         self.__text = self.word_replace(self.__text)
@@ -152,9 +150,7 @@ class Uwuified:
 
     def stutter(self, text: str, strength: float) -> str:
         """Adds stuttering to a string."""
-        return self.REGEX_STUTTER.sub(
-            partial(self.stutter_replace, strength=strength), text, 0
-        )
+        return self.REGEX_STUTTER.sub(partial(self.stutter_replace, strength=strength), text, 0)
 
     def nyaify(self, text: str) -> str:
         """Nyaifies a string by adding a 'y' between an 'n' and a vowel."""
@@ -169,9 +165,7 @@ class Uwuified:
 
     def emoji(self, text: str, strength: float) -> str:
         """Replaces some punctuation with emoticons."""
-        return self.REGEX_PUNCTUATION.sub(
-            partial(self.emoji_replace, strength=strength), text, 0
-        )
+        return self.REGEX_PUNCTUATION.sub(partial(self.emoji_replace, strength=strength), text, 0)
 
     def tildes(self, match: re.Match, strength: float = 0.0):
         """Adds some tildes to spaces."""
