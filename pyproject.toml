@@ -38,10 +38,6 @@ docs = [
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.sphinx]
-copyright = "Let's build a ..."
-author = "Bradley Reynolds"
-
 [tool.black]
 target-version = ["py310"]
 line-length = 120
