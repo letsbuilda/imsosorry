@@ -1,13 +1,13 @@
 [project]
 name = "imsosorry"
-version = "1.2.0"
+version = "1.2.1"
 description = "Sometimes it can be necessary to call upon the ancient arts..."
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
 ]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = [
 
 ]
@@ -38,11 +38,11 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.black]
-target-version = ["py37"]
+target-version = ["py38"]
 line-length = 120
 
 [tool.ruff]
-target-version = "py37"
+target-version = "py38"
 line-length = 120
 select = ["ALL"]
 ignore = [
