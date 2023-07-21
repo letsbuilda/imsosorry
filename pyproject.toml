@@ -21,7 +21,6 @@ dev = [
     "pip-tools",
     "pre-commit",
     "black",
-    "isort",
     "ruff",
 ]
 tests = [
