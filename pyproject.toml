@@ -18,9 +18,10 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
+    "pip-tools",
+    "pre-commit",
     "black",
-    "isort",
-    "pylint",
+    "ruff",
 ]
 tests = [
     "pytest",
@@ -30,23 +31,39 @@ docs = [
     "furo",
     "sphinx-autoapi",
     "releases",
-    "toml",
 ]
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.sphinx]
-copyright = "Let's build a ..."
-author = "Bradley Reynolds"
-
 [tool.black]
-target-version = ["py310"]
+target-version = ["py37"]
 line-length = 120
 
-[tool.isort]
-profile = "black"
+[tool.ruff]
+target-version = "py37"
+line-length = 120
+select = ["ALL"]
+ignore = [
+    "S311", # (Standard pseudo-random generators are not suitable for cryptographic purposes) - Really?
+]
+
+[tool.ruff.extend-per-file-ignores]
+"docs/*" = [
+    "INP001", # (File `tests/*.py` is part of an implicit namespace package. Add an `__init__.py`.) - Docs are not modules
+    "FA102", # (Missing `from __future__ import annotations`, but uses PEP 585 collection) - Docs are actually built on the latest stable release of Python
+]
+"tests/*" = [
+    "INP001", # (File `tests/*.py` is part of an implicit namespace package. Add an `__init__.py`.) - Tests are not modules
+    "S101", # (Use of `assert` detected) - Yes, that's the point
+]
+
+[tool.ruff.isort]
+known-first-party = ["imsosorry.uwuification"]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
 
 [tool.pytest.ini_options]
 addopts = "tests -r a -v --doctest-modules src"

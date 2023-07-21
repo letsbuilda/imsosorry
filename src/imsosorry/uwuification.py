@@ -1,4 +1,4 @@
-"""The ancient arts of Uwuification"""
+"""The ancient arts of Uwuification."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ EMOJIS = [
     "σωσ",
     "òωó",
     "(///ˬ///✿)",
-    "(U ﹏ U)",
+    "(U ﹏ U)",  # noqa: RUF001 - literally the point...
     "( ͡o ω ͡o )",
     "ʘwʘ",
     ":3",
@@ -48,7 +48,7 @@ EMOJIS = [
     "rawr",
     "^^",
     "^^;;",
-    "(ˆ ﻌ ˆ)♡",
+    "(ˆ ﻌ ˆ)♡",  # noqa: RUF001 - literally the point...
     "^•ﻌ•^",
     "/(^•ω•^)",
     "(✿oωo)",
@@ -76,7 +76,7 @@ SUBSTITUTE_NYA = r"ny\1"
 
 
 def word_replace(text: str) -> str:
-    """Replaces words that are keys in the word replacement hash to the values specified."""
+    """Replace words that are keys in the word replacement hash to the values specified."""
     for word, replacement in WORD_REPLACE.items():
         text = text.replace(word, replacement)
     return text
@@ -88,7 +88,7 @@ def char_replace(text: str) -> str:
 
 
 def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
-    """Replaces a single character with a stuttered character."""
+    """Replace a single character with a stuttered character."""
     match_string = match.group()
     if random.random() < strength:
         return f"{match_string}-{match_string[-1]}"  # Stutter the last character
@@ -96,17 +96,17 @@ def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
 
 
 def stutter(text: str, strength: float) -> str:
-    """Adds stuttering to a string."""
+    """Add stuttering to a string."""
     return REGEX_STUTTER.sub(partial(stutter_replace, strength=strength), text, 0)
 
 
 def nyaify(text: str) -> str:
-    """Nyaifies a string by adding a 'y' between an 'n' and a vowel."""
+    """Nyaify a string by adding a 'y' between an 'n' and a vowel."""
     return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
 
 
 def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
-    """Replaces a punctuation character with an emoticon."""
+    """Replace a punctuation character with an emoticon."""
     match_string = match.group()
     if random.random() < strength:
         return f" {random.choice(EMOJIS)} "
@@ -114,12 +114,12 @@ def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
 
 
 def emoji(text: str, strength: float) -> str:
-    """Replaces some punctuation with emoticons."""
+    """Replace some punctuation with emoticons."""
     return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
 
 
-def tildes(match: re.Match, strength: float = 0.0):
-    """Adds some tildes to spaces."""
+def tildes(match: re.Match, strength: float = 0.0) -> str:
+    """Add some tildes to spaces."""
     match_string = match.group()
     if random.random() < strength:
         return "~"
@@ -127,7 +127,7 @@ def tildes(match: re.Match, strength: float = 0.0):
 
 
 def tildify(text: str, strength: float) -> str:
-    """Adds some tildes to spaces."""
+    """Add some tildes to spaces."""
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
@@ -138,12 +138,11 @@ def uwuify(
     emoji_strength: float = 0.1,
     tilde_strength: float = 0.1,
 ) -> str:
-    """Takes a string and returns an uwuified version of it."""
+    """Take a string and returns an uwuified version of it."""
     text = text.lower()
     text = word_replace(text)
     text = nyaify(text)
     text = char_replace(text)
     text = stutter(text, stutter_strength)
     text = emoji(text, emoji_strength)
-    text = tildify(text, tilde_strength)
-    return text
+    return tildify(text, tilde_strength)
