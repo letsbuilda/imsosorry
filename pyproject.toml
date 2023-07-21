@@ -18,9 +18,11 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
+    "pip-tools",
+    "pre-commit",
     "black",
     "isort",
-    "pylint",
+    "ruff",
 ]
 tests = [
     "pytest",
@@ -30,7 +32,6 @@ docs = [
     "furo",
     "sphinx-autoapi",
     "releases",
-    "toml",
 ]
 
 [build-system]
