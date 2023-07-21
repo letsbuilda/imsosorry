@@ -53,8 +53,8 @@ releases_github_path = REPO_LINK.removeprefix("https://github.com/")
 releases_release_uri = f"{REPO_LINK}/releases/tag/v%s"
 
 
-def linkcode_resolve(domain, info):
-    """linkcode_resolve"""
+def linkcode_resolve(domain: str, info: dict) -> str:
+    """linkcode_resolve."""
     if domain != "py":
         return None
     if not info["module"]:

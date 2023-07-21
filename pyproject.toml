@@ -45,7 +45,22 @@ line-length = 120
 target-version = "py37"
 line-length = 120
 select = ["ALL"]
-ignore = []
+ignore = [
+    "S311", # (Standard pseudo-random generators are not suitable for cryptographic purposes) - Really?
+]
+
+[tool.ruff.extend-per-file-ignores]
+"docs/*" = [
+    "INP001", # (File `tests/*.py` is part of an implicit namespace package. Add an `__init__.py`.) - Docs are not modules
+    "FA102", # (Missing `from __future__ import annotations`, but uses PEP 585 collection) - Docs are actually built on the latest stable release of Python
+]
+"tests/*" = [
+    "INP001", # (File `tests/*.py` is part of an implicit namespace package. Add an `__init__.py`.) - Tests are not modules
+    "S101", # (Use of `assert` detected) - Yes, that's the point
+]
+
+[tool.ruff.isort]
+known-first-party = ["imsosorry.uwuification"]
 
 [tool.ruff.pydocstyle]
 convention = "numpy"

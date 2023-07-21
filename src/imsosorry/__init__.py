@@ -1,5 +1,7 @@
-"""I'm so sorry
-Sometimes it can be necessary to call upon the ancient arts...
-"""
+"""Sometimes it can be necessary to call upon the ancient arts..."""
 
 from .uwuification import uwuify
+
+__all__ = [
+    "uwuify",
+]

@@ -51,8 +51,8 @@ function Invoke-Upgrade-Deps
 
 function Invoke-Lint
 {
-    python -m black src/
-    python -m ruff --fix src/
+    python -m black .
+    python -m ruff --fix .
 }
 
 function Invoke-Test
