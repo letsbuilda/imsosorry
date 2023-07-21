@@ -13,4 +13,4 @@ permissions:
 
 jobs:
   docs:
-    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@c194ec59628447c17718ee155e52060ef92dc406
+    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@c4fb123ed14ed8cc9df9820ca63bace02981e9fe # v1.0.0
