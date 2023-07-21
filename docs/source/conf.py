@@ -6,7 +6,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 from importlib.metadata import metadata
 
-project_metadata = metadata("api.letsbuilda.dev")
+project_metadata = metadata("imsosorry")
 project: str = project_metadata["Name"]
 release: str = project_metadata["Version"]
 REPO_LINK: str = project_metadata["Project-URL"].replace("repository, ", "")
