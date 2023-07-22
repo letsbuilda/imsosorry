@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Testing using PowerShell to replace my Makefile
+Makefile
 
 .DESCRIPTION
 USAGE
