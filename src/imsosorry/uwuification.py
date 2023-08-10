@@ -139,10 +139,23 @@ def uwuify(
     tilde_strength: float = 0.1,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
+    original_text = text.lower()
+
+    # initial round
     text = text.lower()
     text = word_replace(text)
     text = nyaify(text)
     text = char_replace(text)
     text = stutter(text, stutter_strength)
     text = emoji(text, emoji_strength)
-    return tildify(text, tilde_strength)
+    text = tildify(text, tilde_strength)
+
+    while text == original_text:
+        text = uwuify(
+            text,
+            stutter_strength=stutter_strength + 0.225,
+            emoji_strength=emoji_strength + 0.075,
+            tilde_strength=tilde_strength + 0.175,
+        )
+
+    return text
