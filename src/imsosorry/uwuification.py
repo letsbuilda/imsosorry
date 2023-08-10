@@ -150,7 +150,7 @@ def uwuify(
     text = emoji(text, emoji_strength)
     text = tildify(text, tilde_strength)
 
-    while text == original_text:
+    if text == original_text:
         text = uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
