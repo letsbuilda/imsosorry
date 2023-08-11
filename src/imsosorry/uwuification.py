@@ -5,6 +5,7 @@ from __future__ import annotations
 import random
 import re
 from functools import partial
+import string
 
 WORD_REPLACE = {
     "small": "smol",
@@ -91,7 +92,8 @@ def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
     """Replace a single character with a stuttered character."""
     match_string = match.group()
     if random.random() < strength:
-        return f"{match_string}-{match_string[-1]}"  # Stutter the last character
+        # Stutter the last character
+        return f"{match_string}-{match_string[-1]}"
     return match_string
 
 
@@ -131,17 +133,8 @@ def tildify(text: str, strength: float) -> str:
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
-def uwuify(
-    text: str,
-    *,
-    stutter_strength: float = 0.2,
-    emoji_strength: float = 0.1,
-    tilde_strength: float = 0.1,
-) -> str:
-    """Take a string and returns an uwuified version of it."""
+def _uwuify(text: str, *, stutter_strength: float, emoji_strength: float, tilde_strength: float) -> str:
     original_text = text.lower()
-
-    # initial round
     text = text.lower()
     text = word_replace(text)
     text = nyaify(text)
@@ -151,11 +144,32 @@ def uwuify(
     text = tildify(text, tilde_strength)
 
     if text == original_text:
-        text = uwuify(
+        text = _uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
             emoji_strength=emoji_strength + 0.075,
             tilde_strength=tilde_strength + 0.175,
         )
+
+    return text
+
+
+def uwuify(
+    text: str,
+    *,
+    stutter_strength: float = 0.2,
+    emoji_strength: float = 0.1,
+    tilde_strength: float = 0.1,
+) -> str:
+    """Take a string and returns an uwuified version of it."""
+
+    for letter in string.ascii_letters:
+        if letter in text:
+            return _uwuify(
+                text,
+                stutter_strength=stutter_strength,
+                emoji_strength=emoji_strength,
+                tilde_strength=tilde_strength
+            )
 
     return text
