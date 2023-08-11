@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import random
 import re
-from functools import partial
 import string
+from functools import partial
 
 WORD_REPLACE = {
     "small": "smol",
@@ -162,14 +162,13 @@ def uwuify(
     tilde_strength: float = 0.1,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
-
     for letter in string.ascii_letters:
         if letter in text:
             return _uwuify(
                 text,
                 stutter_strength=stutter_strength,
                 emoji_strength=emoji_strength,
-                tilde_strength=tilde_strength
+                tilde_strength=tilde_strength,
             )
 
     return text
