@@ -8,6 +8,6 @@ He then raised an `issue https://github.com/python-discord/sir-lancebot/issues/8
 I helped him finalize some of the nitpicks and cleanup from the reviews. We copied and pasted the code into Lancebot's code base to avoid adding another dependency.
 
 His code now lives in Sir Lancebot.
-But I wanted the code for my own bots, and it really is a kinda fun project to play with, so I made my own library here in this repo, and implemnted it in my bots.
+But I wanted the code for my own bots, and it really is a kinda fun project to play with, so I made my own library here in this repo, and implemented it in my bots.
 
 In the future.... What comes next? An OwO command? Even more advanced UwUifications? Who knows?
