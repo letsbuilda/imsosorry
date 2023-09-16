@@ -142,10 +142,11 @@ def uwuify(
     stutter_strength: float = 0.2,
     emoji_strength: float = 0.1,
     tilde_strength: float = 0.1,
+    exempt_words: list[str] = [],
 ) -> str:
     """Take a string and returns an uwuified version of it."""
     text = text.lower()
-    text = word_replace(text)
+    text = word_replace(text, exempt_words)
     text = nyaify(text)
     text = char_replace(text)
     text = stutter(text, stutter_strength)
