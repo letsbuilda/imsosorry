@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from imsosorry.uwuification import EMOJIS, char_replace, emoji, nyaify, stutter, tildify, word_replace
+from imsosorry.uwuification import EMOJIS, char_replace, emoji, nyaify, stutter, tildify, uwuify, word_replace
 
 
 @pytest.mark.parametrize(
@@ -84,3 +84,16 @@ def test_emoji(strength: float, has_emoji: bool) -> None:  # noqa: FBT001 - yes
 def test_tildify(strength: float, in_text: str, out_text: str) -> None:
     """Test adding tildes."""
     assert tildify(in_text, strength) == out_text
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "-",
+        "^",
+        ")",
+    ],
+)
+def test_recursion(text: str) -> None:
+    """Check that recursion doesn't cause an infinite loop."""
+    assert uwuify(text) == text

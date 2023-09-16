@@ -140,7 +140,6 @@ def uwuify(
     tilde_strength: float = 0.1,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
-
     original_text = text.lower()
     text = text.lower()
     text = word_replace(text)
