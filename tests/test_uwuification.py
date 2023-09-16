@@ -20,6 +20,18 @@ def test_word_replace(in_text: str, out_text: str) -> None:
 
 
 @pytest.mark.parametrize(
+    ("in_args", "out_text"),
+    [
+        (("I love dogs", ["love"]), "I love dogs"),
+        (("I love small dogs", ["small"]), "I luv small dogs"),
+    ],
+)
+def test_word_replace_exempt(in_args: tuple[str, list[str]], out_text: str) -> None:
+    """Test replacing words in text with exemptions."""
+    assert word_replace(*in_args) == out_text
+
+
+@pytest.mark.parametrize(
     ("in_text", "out_text"),
     [
         ("look", "wook"),

@@ -75,9 +75,14 @@ SUBSTITUTE_NYA = r"ny\1"
 """A regex to to nyaify words."""
 
 
-def word_replace(text: str) -> str:
-    """Replace words that are keys in the word replacement hash to the values specified."""
+def word_replace(text: str, exempt: list[str] = []) -> str:
+    """Replace words that are keys in the word replacement hash to the values specified.
+    
+    Words in the `exempt` list will be skipped. All words in the `exempt` list should be in lowercase.
+    """
     for word, replacement in WORD_REPLACE.items():
+        if word.lower() in exempt:
+            continue
         text = text.replace(word, replacement)
     return text
 
