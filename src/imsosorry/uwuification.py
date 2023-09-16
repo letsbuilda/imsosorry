@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import random
 import re
-import string
 from functools import partial
 
 WORD_REPLACE = {
@@ -133,7 +132,15 @@ def tildify(text: str, strength: float) -> str:
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
-def _uwuify(text: str, *, stutter_strength: float, emoji_strength: float, tilde_strength: float) -> str:
+def uwuify(
+    text: str,
+    *,
+    stutter_strength: float = 0.2,
+    emoji_strength: float = 0.1,
+    tilde_strength: float = 0.1,
+) -> str:
+    """Take a string and returns an uwuified version of it."""
+
     original_text = text.lower()
     text = text.lower()
     text = word_replace(text)
@@ -143,32 +150,12 @@ def _uwuify(text: str, *, stutter_strength: float, emoji_strength: float, tilde_
     text = emoji(text, emoji_strength)
     text = tildify(text, tilde_strength)
 
-    if text == original_text:
-        text = _uwuify(
+    if text == original_text and any(char.isalpha() for char in text):
+        text = uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
             emoji_strength=emoji_strength + 0.075,
             tilde_strength=tilde_strength + 0.175,
         )
-
-    return text
-
-
-def uwuify(
-    text: str,
-    *,
-    stutter_strength: float = 0.2,
-    emoji_strength: float = 0.1,
-    tilde_strength: float = 0.1,
-) -> str:
-    """Take a string and returns an uwuified version of it."""
-    for letter in string.ascii_letters:
-        if letter in text:
-            return _uwuify(
-                text,
-                stutter_strength=stutter_strength,
-                emoji_strength=emoji_strength,
-                tilde_strength=tilde_strength,
-            )
 
     return text
