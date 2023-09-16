@@ -1,9 +1,0 @@
-name: Pre-Commit autoupdate
-
-on:
-  schedule:
-    - cron: "0 0 * * *"
-
-jobs:
-  pre-commit-autoupdate:
-    uses: darbiadev/.github/.github/workflows/generic-precommit-autoupdate.yaml@4aa7c64159244d12bf9a39d42da89e80004d4af6 # v1.0.1
