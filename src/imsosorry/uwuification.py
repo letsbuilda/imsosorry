@@ -91,7 +91,8 @@ def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
     """Replace a single character with a stuttered character."""
     match_string = match.group()
     if random.random() < strength:
-        return f"{match_string}-{match_string[-1]}"  # Stutter the last character
+        # Stutter the last character
+        return f"{match_string}-{match_string[-1]}"
     return match_string
 
 
@@ -137,12 +138,29 @@ def uwuify(
     stutter_strength: float = 0.2,
     emoji_strength: float = 0.1,
     tilde_strength: float = 0.1,
+    max_emojifiable_len: int = 2,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
+    alpha = any(char.isalpha() for char in text)
+
+    if len(text) < max_emojifiable_len and not alpha:
+        return random.choice(EMOJIS)
+
+    original_text = text.lower()
     text = text.lower()
     text = word_replace(text)
     text = nyaify(text)
     text = char_replace(text)
     text = stutter(text, stutter_strength)
     text = emoji(text, emoji_strength)
-    return tildify(text, tilde_strength)
+    text = tildify(text, tilde_strength)
+
+    if text == original_text and alpha:
+        text = uwuify(
+            text,
+            stutter_strength=stutter_strength + 0.225,
+            emoji_strength=emoji_strength + 0.075,
+            tilde_strength=tilde_strength + 0.175,
+        )
+
+    return text
