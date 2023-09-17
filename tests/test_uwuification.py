@@ -96,4 +96,4 @@ def test_tildify(strength: float, in_text: str, out_text: str) -> None:
 )
 def test_recursion(text: str) -> None:
     """Check that recursion doesn't cause an infinite loop."""
-    assert uwuify(text) == text
+    assert uwuify(text) in EMOJIS

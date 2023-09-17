@@ -140,6 +140,11 @@ def uwuify(
     tilde_strength: float = 0.1,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
+    alpha = any(char.isalpha() for char in text)
+
+    if len(text) < 2 and not alpha:
+        return random.choice(EMOJIS)
+
     original_text = text.lower()
     text = text.lower()
     text = word_replace(text)
@@ -149,7 +154,7 @@ def uwuify(
     text = emoji(text, emoji_strength)
     text = tildify(text, tilde_strength)
 
-    if text == original_text and any(char.isalpha() for char in text):
+    if text == original_text and alpha:
         text = uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
