@@ -38,14 +38,19 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.ruff]
+preview = true
+unsafe-fixes = true
 target-version = "py38"
 line-length = 120
+
+[tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "CPY001", # (Missing copyright notice at top of file)
     "S311", # (Standard pseudo-random generators are not suitable for cryptographic purposes) - Really?
 ]
 
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "docs/*" = [
     "INP001", # (File `tests/*.py` is part of an implicit namespace package. Add an `__init__.py`.) - Docs are not modules
     "FA102", # (Missing `from __future__ import annotations`, but uses PEP 585 collection) - Docs are actually built on the latest stable release of Python
@@ -55,8 +60,8 @@ ignore = [
     "S101", # (Use of `assert` detected) - Yes, that's the point
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["imsosorry.uwuification"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "numpy"

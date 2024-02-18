@@ -4,7 +4,16 @@ from __future__ import annotations
 
 import pytest
 
-from imsosorry.uwuification import EMOJIS, char_replace, emoji, nyaify, stutter, tildify, uwuify, word_replace
+from imsosorry.uwuification import (
+    EMOJIS,
+    char_replace,
+    emoji,
+    nyaify,
+    stutter,
+    tildify,
+    uwuify,
+    word_replace,
+)
 
 
 @pytest.mark.parametrize(
