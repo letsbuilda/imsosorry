@@ -20,11 +20,12 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 dev = [
     "pip-tools",
     "pre-commit",
-    "black",
     "ruff",
+    "mypy",
 ]
 tests = [
     "pytest",
+    "pytest-randomly",
 ]
 docs = [
     "sphinx",

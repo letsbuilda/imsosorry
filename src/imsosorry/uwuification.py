@@ -87,7 +87,7 @@ def char_replace(text: str) -> str:
     return REGEX_WORD_REPLACE.sub("w", text)
 
 
-def stutter_replace(match: re.Match, strength: float = 0.0) -> str:
+def stutter_replace(match: re.Match[str], strength: float = 0.0) -> str:
     """Replace a single character with a stuttered character."""
     match_string = match.group()
     if random.random() < strength:
@@ -106,7 +106,7 @@ def nyaify(text: str) -> str:
     return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
 
 
-def emoji_replace(match: re.Match, strength: float = 0.0) -> str:
+def emoji_replace(match: re.Match[str], strength: float = 0.0) -> str:
     """Replace a punctuation character with an emoticon."""
     match_string = match.group()
     if random.random() < strength:
@@ -119,7 +119,7 @@ def emoji(text: str, strength: float) -> str:
     return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
 
 
-def tildes(match: re.Match, strength: float = 0.0) -> str:
+def tildes(match: re.Match[str], strength: float = 0.0) -> str:
     """Add some tildes to spaces."""
     match_string = match.group()
     if random.random() < strength:
@@ -147,6 +147,7 @@ def uwuify(
         return random.choice(EMOJIS)
 
     original_text = text.lower()
+
     text = text.lower()
     text = word_replace(text)
     text = nyaify(text)
