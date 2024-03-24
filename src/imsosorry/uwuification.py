@@ -139,12 +139,12 @@ def uwuify(
     stutter_strength: float = 0.2,
     emoji_strength: float = 0.1,
     tilde_strength: float = 0.1,
-    max_emojifiable_len: int = 2,
+    minimun_processable_length: int = 2,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
-    alpha = any(char.isalpha() for char in text)
+    contains_alpha = any(char.isalpha() for char in text)
 
-    if len(text) < max_emojifiable_len and not alpha:
+    if len(text) < minimun_processable_length and not contains_alpha:
         return random.choice(EMOJIS)
 
     text = text.lower()
@@ -161,7 +161,7 @@ def uwuify(
     for transform in transforms:
         text = transform(text)
 
-    if text == original_text and alpha:
+    if text == original_text and contains_alpha:
         text = uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
