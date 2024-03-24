@@ -11,15 +11,6 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
 
-def re_sub(
-    text: str,
-    match_pattern: re.Pattern[str],
-    replace_pattern: str,
-) -> str:
-    """Replace pattern in string."""
-    return match_pattern.sub(replace_pattern, text)
-
-
 def re_sub_maybe(
     text: str,
     pattern: re.Pattern[str],
