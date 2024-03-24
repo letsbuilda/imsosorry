@@ -162,7 +162,7 @@ def uwuify(
         text = transform(text)
 
     if text == original_text and contains_alpha:
-        text = uwuify(
+        return uwuify(
             text,
             stutter_strength=stutter_strength + 0.225,
             emoji_strength=emoji_strength + 0.075,
