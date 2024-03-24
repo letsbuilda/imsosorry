@@ -7,10 +7,6 @@ from copy import copy
 from functools import partial
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    import re
-    from collections.abc import Callable
-
 from .constants import (
     EMOJIS,
     REGEX_NYA,
@@ -21,6 +17,10 @@ from .constants import (
     SUBSTITUTE_NYA,
     WORD_REPLACE,
 )
+
+if TYPE_CHECKING:
+    import re
+    from collections.abc import Callable
 
 
 def word_replace(text: str) -> str:
