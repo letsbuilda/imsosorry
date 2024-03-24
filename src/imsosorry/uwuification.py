@@ -6,6 +6,10 @@ import random
 import re
 from copy import copy
 from functools import partial
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 WORD_REPLACE = {
     "small": "smol",
@@ -57,7 +61,7 @@ EMOJIS = [
 """A list of emojis/emoticons to add."""
 
 REGEX_WORD_REPLACE = re.compile(r"(?<!w)[lr](?!w)")
-"""A wegex that to detect certain characters to change to "w"s."""
+"""A regex that to detect certain characters to change to "w"s."""
 
 REGEX_PUNCTUATION = re.compile(r"[.!?\r\n\t]")
 """A regex to detect certain punctuation characters to emotify /(^•ω•^)"""
@@ -83,54 +87,39 @@ def word_replace(text: str) -> str:
     return text
 
 
-def char_replace(text: str) -> str:
-    """Replace certain characters with 'w'."""
-    return REGEX_WORD_REPLACE.sub("w", text)
+def stutter_string(text: str) -> str:
+    """Repeat the last character in a string."""
+    return f"{text}-{text[-1]}"
 
 
-def stutter_replace(match: re.Match[str], strength: float = 0.0) -> str:
-    """Replace a single character with a stuttered character."""
-    match_string = match.group()
-    if random.random() < strength:
-        # Stutter the last character
-        return f"{match_string}-{match_string[-1]}"
-    return match_string
+def emoji_string(_text: str) -> str:
+    """Return a random emoji."""
+    return f" {random.choice(EMOJIS)} "
 
 
-def stutter(text: str, strength: float) -> str:
-    """Add stuttering to a string."""
-    return REGEX_STUTTER.sub(partial(stutter_replace, strength=strength), text, 0)
+def re_sub(
+    text: str,
+    match_pattern: re.Pattern[str],
+    replace_pattern: str,
+) -> str:
+    """Replace pattern in string."""
+    return match_pattern.sub(replace_pattern, text)
 
 
-def nyaify(text: str) -> str:
-    """Nyaify a string by adding a 'y' between an 'n' and a vowel."""
-    return REGEX_NYA.sub(SUBSTITUTE_NYA, text, 0)
-
-
-def emoji_replace(match: re.Match[str], strength: float = 0.0) -> str:
-    """Replace a punctuation character with an emoticon."""
-    match_string = match.group()
-    if random.random() < strength:
-        return f" {random.choice(EMOJIS)} "
-    return match_string
-
-
-def emoji(text: str, strength: float) -> str:
-    """Replace some punctuation with emoticons."""
-    return REGEX_PUNCTUATION.sub(partial(emoji_replace, strength=strength), text, 0)
-
-
-def tildes(match: re.Match[str], strength: float = 0.0) -> str:
-    """Add some tildes to spaces."""
-    match_string = match.group()
-    if random.random() < strength:
-        return "~"
-    return match_string
-
-
-def tildify(text: str, strength: float) -> str:
-    """Add some tildes to spaces."""
-    return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
+def re_sub_maybe(
+    text: str,
+    pattern: re.Pattern[str],
+    text_getter: Callable[[str], str],
+    strength: float = 0.0,
+) -> str:
+    """Replace pattern in string randomly."""
+    matches = pattern.findall(text)
+    for match in matches:
+        new_text = match.group()
+        if random.random() < strength:
+            new_text = text_getter(new_text)
+        text = text.replace(match, new_text)
+    return text
 
 
 def uwuify(
@@ -141,7 +130,7 @@ def uwuify(
     tilde_strength: float = 0.1,
     minimun_processable_length: int = 2,
 ) -> str:
-    """Take a string and returns an uwuified version of it."""
+    """Uwuify a string."""
     contains_alpha = any(char.isalpha() for char in text)
 
     if len(text) < minimun_processable_length and not contains_alpha:
@@ -152,14 +141,14 @@ def uwuify(
 
     transforms = [
         word_replace,
-        nyaify,
-        char_replace,
-        partial(stutter, strength=stutter_strength),
-        partial(emoji, strength=emoji_strength),
-        partial(tildify, strength=tilde_strength),
+        partial(re_sub, match_pattern=REGEX_NYA, replace_pattern=SUBSTITUTE_NYA),
+        partial(re_sub, match_pattern=REGEX_WORD_REPLACE, replace_pattern="w"),
+        partial(re_sub_maybe, pattern=REGEX_TILDE, text_getter=stutter_string, strength=stutter_strength),
+        partial(re_sub_maybe, pattern=REGEX_PUNCTUATION, text_getter=emoji_string, strength=emoji_strength),
+        partial(re_sub_maybe, pattern=REGEX_TILDE, text_getter=lambda _text: "~", strength=tilde_strength),
     ]
     for transform in transforms:
-        text = transform(text)
+        text = transform(text)  # type: ignore[operator]
 
     if text == original_text and contains_alpha:
         return uwuify(
