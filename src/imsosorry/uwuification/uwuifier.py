@@ -1,11 +1,12 @@
-"""The ancient arts of Uwuification."""
+"""Uwuification of text."""
 
 from __future__ import annotations
 
 import random
 from copy import copy
 from functools import partial
-from typing import TYPE_CHECKING
+
+from imsosorry.uwuification.replacers.regex import re_sub, re_sub_maybe
 
 from .constants import (
     EMOJIS,
@@ -18,17 +19,6 @@ from .constants import (
     WORD_REPLACE,
 )
 
-if TYPE_CHECKING:
-    import re
-    from collections.abc import Callable
-
-
-def word_replace(text: str) -> str:
-    """Replace words that are keys in the word replacement hash to the values specified."""
-    for word, replacement in WORD_REPLACE.items():
-        text = text.replace(word, replacement)
-    return text
-
 
 def stutter_string(text: str) -> str:
     """Repeat the last character in a string."""
@@ -40,29 +30,36 @@ def emoji_string(_text: str) -> str:
     return f" {random.choice(EMOJIS)} "
 
 
-def re_sub(
-    text: str,
-    match_pattern: re.Pattern[str],
-    replace_pattern: str,
-) -> str:
-    """Replace pattern in string."""
-    return match_pattern.sub(replace_pattern, text)
-
-
-def re_sub_maybe(
-    text: str,
-    pattern: re.Pattern[str],
-    text_getter: Callable[[str], str],
-    strength: float = 0.0,
-) -> str:
-    """Replace pattern in string randomly."""
-    matches = pattern.findall(text)
-    for match in matches:
-        new_text = match.group()
-        if random.random() < strength:
-            new_text = text_getter(new_text)
-        text = text.replace(match, new_text)
+def word_replace(text: str) -> str:
+    """Replace words that are keys in the word replacement hash to the values specified."""
+    for word, replacement in WORD_REPLACE.items():
+        text = text.replace(word, replacement)
     return text
+
+
+def nyaify(text: str) -> str:
+    """Nyaify a string by adding a 'y' between an 'n' and a vowel."""
+    return re_sub(text=text, match_pattern=REGEX_NYA, replace_pattern=SUBSTITUTE_NYA)
+
+
+def char_replace(text: str) -> str:
+    """Replace certain characters with 'w'."""
+    return re_sub(text=text, match_pattern=REGEX_WORD_REPLACE, replace_pattern="w")
+
+
+def stutter(text: str, strength: float) -> str:
+    """Add stuttering to a string."""
+    return re_sub_maybe(text=text, pattern=REGEX_STUTTER, text_getter=stutter_string, strength=strength)
+
+
+def emoji(text: str, strength: float) -> str:
+    """Replace some punctuation with emoticons."""
+    return re_sub_maybe(text=text, pattern=REGEX_PUNCTUATION, text_getter=emoji_string, strength=strength)
+
+
+def tildify(text: str, strength: float) -> str:
+    """Add some tildes to spaces."""
+    return re_sub_maybe(text=text, pattern=REGEX_TILDE, text_getter=lambda _text: "~", strength=strength)
 
 
 def uwuify(
@@ -84,11 +81,12 @@ def uwuify(
 
     transforms = [
         word_replace,
-        partial(re_sub, match_pattern=REGEX_NYA, replace_pattern=SUBSTITUTE_NYA),
-        partial(re_sub, match_pattern=REGEX_WORD_REPLACE, replace_pattern="w"),
-        partial(re_sub_maybe, pattern=REGEX_STUTTER, text_getter=stutter_string, strength=stutter_strength),
-        partial(re_sub_maybe, pattern=REGEX_PUNCTUATION, text_getter=emoji_string, strength=emoji_strength),
-        partial(re_sub_maybe, pattern=REGEX_TILDE, text_getter=lambda _text: "~", strength=tilde_strength),
+        nyaify,
+        char_replace,
+        stutter,
+        partial(stutter, strength=stutter_strength),
+        partial(emoji, strength=emoji_strength),
+        partial(tildify, strength=tilde_strength),
     ]
     for transform in transforms:
         text = transform(text)  # type: ignore[operator]
