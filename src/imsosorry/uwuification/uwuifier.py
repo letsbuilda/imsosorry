@@ -6,7 +6,7 @@ import random
 from copy import copy
 from functools import partial
 
-from imsosorry.uwuification.replacers.regex import re_sub, re_sub_maybe
+from imsosorry.uwuification.replacers.regex import re_sub_maybe
 
 from .constants import (
     EMOJIS,
@@ -20,14 +20,19 @@ from .constants import (
 )
 
 
-def stutter_string(text: str) -> str:
+def _stutter_string(text: str) -> str:
     """Repeat the last character in a string."""
     return f"{text}-{text[-1]}"
 
 
-def emoji_string(_text: str) -> str:
+def _emoji_string(_text: str) -> str:
     """Return a random emoji."""
     return f" {random.choice(EMOJIS)} "
+
+
+def _tildify_string(_text: str) -> str:
+    """Repeat the last character in a string."""
+    return "~"
 
 
 def word_replace(text: str) -> str:
@@ -39,27 +44,27 @@ def word_replace(text: str) -> str:
 
 def nyaify(text: str) -> str:
     """Nyaify a string by adding a 'y' between an 'n' and a vowel."""
-    return re_sub(text=text, match_pattern=REGEX_NYA, replace_pattern=SUBSTITUTE_NYA)
+    return REGEX_NYA.sub(SUBSTITUTE_NYA, text)
 
 
 def char_replace(text: str) -> str:
     """Replace certain characters with 'w'."""
-    return re_sub(text=text, match_pattern=REGEX_WORD_REPLACE, replace_pattern="w")
+    return REGEX_WORD_REPLACE.sub("w", text)
 
 
 def stutter(text: str, strength: float) -> str:
     """Add stuttering to a string."""
-    return re_sub_maybe(text=text, pattern=REGEX_STUTTER, text_getter=stutter_string, strength=strength)
+    return re_sub_maybe(text=text, pattern=REGEX_STUTTER, text_getter=_stutter_string, strength=strength)
 
 
 def emoji(text: str, strength: float) -> str:
     """Replace some punctuation with emoticons."""
-    return re_sub_maybe(text=text, pattern=REGEX_PUNCTUATION, text_getter=emoji_string, strength=strength)
+    return re_sub_maybe(text=text, pattern=REGEX_PUNCTUATION, text_getter=_emoji_string, strength=strength)
 
 
 def tildify(text: str, strength: float) -> str:
     """Add some tildes to spaces."""
-    return re_sub_maybe(text=text, pattern=REGEX_TILDE, text_getter=lambda _text: "~", strength=strength)
+    return re_sub_maybe(text=text, pattern=REGEX_TILDE, text_getter=_tildify_string, strength=strength)
 
 
 def uwuify(
