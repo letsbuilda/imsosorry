@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import random
 import re
+from copy import copy
 from functools import partial
 
 WORD_REPLACE = {
@@ -146,15 +147,19 @@ def uwuify(
     if len(text) < max_emojifiable_len and not alpha:
         return random.choice(EMOJIS)
 
-    original_text = text.lower()
-
     text = text.lower()
-    text = word_replace(text)
-    text = nyaify(text)
-    text = char_replace(text)
-    text = stutter(text, stutter_strength)
-    text = emoji(text, emoji_strength)
-    text = tildify(text, tilde_strength)
+    original_text = copy(text)
+
+    transforms = [
+        word_replace,
+        nyaify,
+        char_replace,
+        partial(stutter, strength=stutter_strength),
+        partial(emoji, strength=emoji_strength),
+        partial(tildify, strength=tilde_strength),
+    ]
+    for transform in transforms:
+        text = transform(text)
 
     if text == original_text and alpha:
         text = uwuify(
