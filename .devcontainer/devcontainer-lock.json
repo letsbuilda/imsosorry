@@ -1,9 +1,9 @@
 {
   "features": {
     "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "1.3.5",
-      "resolved": "ghcr.io/devcontainers/features/powershell@sha256:0dd4e0352cc77ef586f7cca2414d3e8a7c506ad6df9ecd2221d078a961425bd6",
-      "integrity": "sha256:0dd4e0352cc77ef586f7cca2414d3e8a7c506ad6df9ecd2221d078a961425bd6"
+      "version": "1.4.0",
+      "resolved": "ghcr.io/devcontainers/features/powershell@sha256:de14707bd133d9634cb85f5502aac96e1d0f477b015e23db6185833f5c6fcec6",
+      "integrity": "sha256:de14707bd133d9634cb85f5502aac96e1d0f477b015e23db6185833f5c6fcec6"
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "1.4.2",
