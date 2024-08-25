@@ -5,7 +5,7 @@ Changelog
 =========
 
 - :release:`1.2.1 <20th July 2023>`
-- :feature:`34` Drop support for Python 3.7
+- :support:`34` Drop support for Python 3.7
 
 - :release:`1.2.0 <29th January 2023>`
 - :feature:`18` Add ``uwuify`` to top level package exports
