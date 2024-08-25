@@ -4,7 +4,7 @@
 Changelog
 =========
 
-- :release:`1.2.1 <20th July 2023>`
+- :release:`1.2.1 <20th July 2023>` 34
 - :support:`34` Drop support for Python 3.7
 
 - :release:`1.2.0 <29th January 2023>`
