@@ -49,6 +49,7 @@ select = ["ALL"]
 ignore = [
     "CPY001", # (Missing copyright notice at top of file)
     "S311", # (Standard pseudo-random generators are not suitable for cryptographic purposes) - Really?
+    "DOC201", # (`return` is not documented in docstring) - TODO
 ]
 
 [tool.ruff.lint.extend-per-file-ignores]
@@ -66,3 +67,11 @@ known-first-party = ["imsosorry.uwuification"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.codeflash]
+# All paths are relative to this pyproject.toml's directory.
+module-root = "src"
+tests-root = "tests"
+test-framework = "pytest"
+ignore-paths = []
+formatter-cmds = ["ruff check --exit-zero --fix $file", "ruff format $file"]
