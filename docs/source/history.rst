@@ -1,7 +1,7 @@
 History
 =======
 
-Gitautas wanted a easy first Python project, so he made ``slowo``_.
+Gitautas wanted a easy first Python project, so he made ``slowo_``.
 I helped him with a bit of syntax and setting up the packaging boilerplate.
 
 He then raised an issue_ and a PR_ to replace the Sir Lancebot implemention with his new more featureful library.
