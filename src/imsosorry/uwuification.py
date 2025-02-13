@@ -132,15 +132,23 @@ def tildify(text: str, strength: float) -> str:
     return REGEX_TILDE.sub(partial(tildes, strength=strength), text, 0)
 
 
+# any text considered short, or less than this length, will have params bumped up
+LONG_TEXT = 50
+
+
 def uwuify(
     text: str,
     *,
     stutter_strength: float = 0.2,
     emoji_strength: float = 0.1,
-    tilde_strength: float = 0.1,
+    tilde_strength: float = 0.25,
     max_emojifiable_len: int = 2,
 ) -> str:
     """Take a string and returns an uwuified version of it."""
+    if len(text) < LONG_TEXT:
+        emoji_strength += 0.2
+        tilde_strength += 0.05
+
     alpha = any(char.isalpha() for char in text)
 
     if len(text) < max_emojifiable_len and not alpha:
