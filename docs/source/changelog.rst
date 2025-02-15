@@ -4,6 +4,9 @@
 Changelog
 =========
 
+- :release:`1.2.2 <14th February 2025>`
+- :support:`-` Setup Trusted Publishing
+
 - :release:`1.2.1 <20th July 2023>` 34
 - :support:`34` Drop support for Python 3.7
 
