@@ -4,6 +4,9 @@
 Changelog
 =========
 
+- :release:`1.3.0 <14th February 2025>`
+- :support:`-` Drop support for Python 3.8
+
 - :release:`1.2.3 <14th February 2025>` 103
 - :support:`103` Bump Trusted Publishing action
 
