@@ -16,19 +16,19 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
-    "nox==2024.10.9",
-    "pre-commit==4.0.1",
-    "ruff==0.7.1",
-    "mypy==1.13.0",
+    "nox==2025.2.9",
+    "pre-commit==4.1.0",
+    "ruff==0.9.6",
+    "mypy==1.15.0",
 ]
 tests = [
-    "pytest==8.3.3",
-    "pytest-randomly==3.15.0",
+    "pytest==8.3.4",
+    "pytest-randomly==3.16.0",
 ]
 docs = [
     "sphinx==8.1.3",
     "furo==2024.8.6",
-    "sphinx-autoapi==3.3.2",
+    "sphinx-autoapi==3.5.0",
     "releases==2.1.1",
 ]
 
