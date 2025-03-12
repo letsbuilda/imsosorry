@@ -33,8 +33,8 @@ docs = [
 ]
 
 [build-system]
-requires = ["setuptools>=77.0.3"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build"]
+build-backend = "uv_build"
 
 [tool.ruff]
 preview = true
