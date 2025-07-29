@@ -5,7 +5,8 @@ description = "Sometimes it can be necessary to call upon the ancient arts..."
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@tailstory.dev" },
 ]
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []
