@@ -25,6 +25,7 @@ dev = [
 tests = [
     "pytest>=8.4.1",
     "pytest-randomly>=3.16.0",
+    "pytest-codspeed>=4.0.0",
 ]
 docs = [
     "sphinx",
