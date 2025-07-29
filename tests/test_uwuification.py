@@ -53,6 +53,7 @@ def test_char_replace(in_text: str, out_text: str) -> None:
         (1.0, "I love dogs", "I l-love d-dogs"),
     ],
 )
+@pytest.mark.benchmark
 def test_stutter(strength: float, in_text: str, out_text: str) -> None:
     """Test adding stutters to text."""
     assert stutter(in_text, strength) == out_text
