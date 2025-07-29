@@ -16,13 +16,13 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
 [project.optional-dependencies]
 dev = [
-    "nox==2025.2.9",
+    "nox==2025.5.1",
     "pre-commit==4.2.0",
-    "ruff==0.11.2",
-    "mypy==1.15.0",
+    "ruff==0.12.1",
+    "mypy==1.16.1",
 ]
 tests = [
-    "pytest==8.3.5",
+    "pytest==8.4.1",
     "pytest-randomly==3.16.0",
 ]
 docs = [
