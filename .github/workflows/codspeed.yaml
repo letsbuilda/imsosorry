@@ -35,5 +35,5 @@ jobs:
 
       - uses: CodSpeedHQ/action@0700edb451d0e9f2426f99bd6977027e550fb2a6 # v4.7.0
         with:
-          run: pytest tests/ --codspeed
+          run: uv run pytest tests/ --codspeed
           mode: "simulation"
