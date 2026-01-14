@@ -1,13 +1,14 @@
 name: Codspeed
 
-permissions:
-  contents: read
-
 on:
   push:
     branches:
       - main
   pull_request:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   codspeed:
@@ -34,4 +35,3 @@ jobs:
         with:
           run: pytest tests/ --codspeed
           mode: "simulation"
-          token: ${{ secrets.CODSPEED_TOKEN }}
