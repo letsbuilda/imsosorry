@@ -8,11 +8,11 @@ on:
 
 jobs:
   pre-commit:
-    uses: darbiadev/.github/.github/workflows/generic-precommit.yaml@45471b560aceda922ebec22a20b72f0c29914cad # v15.1.0
+    uses: darbiadev/.github/.github/workflows/generic-precommit.yaml@440166417b42442c6114aaa895094f0db7de9b78 # v15.2.0
 
   lint:
     needs: pre-commit
-    uses: darbiadev/.github/.github/workflows/python-lint.yaml@45471b560aceda922ebec22a20b72f0c29914cad # v15.1.0
+    uses: darbiadev/.github/.github/workflows/python-lint.yaml@440166417b42442c6114aaa895094f0db7de9b78 # v15.2.0
 
   test:
     needs: lint
@@ -21,7 +21,7 @@ jobs:
         os: [ ubuntu-latest ]
         python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13" ]
 
-    uses: darbiadev/.github/.github/workflows/python-test.yaml@45471b560aceda922ebec22a20b72f0c29914cad # v15.1.0
+    uses: darbiadev/.github/.github/workflows/python-test.yaml@440166417b42442c6114aaa895094f0db7de9b78 # v15.2.0
     with:
       os: ${{ matrix.os }}
       python-version: ${{ matrix.python-version }}
@@ -33,4 +33,4 @@ jobs:
       pages: write
       id-token: write
 
-    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@45471b560aceda922ebec22a20b72f0c29914cad # v15.1.0
+    uses: darbiadev/.github/.github/workflows/github-pages-python-sphinx.yaml@440166417b42442c6114aaa895094f0db7de9b78 # v15.2.0
