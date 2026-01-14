@@ -18,7 +18,7 @@ documentation = "https://docs.letsbuilda.dev/imsosorry/"
 [dependency-groups]
 dev = [
     "nox>=2025.5.1",
-    "pre-commit>=4.2.0",
+    "prek>=0.2.28",
     "ruff>=0.12.1",
     "mypy>=1.16.1",
 ]
