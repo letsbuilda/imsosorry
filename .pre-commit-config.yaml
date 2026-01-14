@@ -12,4 +12,3 @@ repos:
       - id: mixed-line-ending
         args: [ --fix=lf ]
       - id: end-of-file-fixer
-        exclude: .devcontainer/devcontainer-lock.json
