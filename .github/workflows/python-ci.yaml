@@ -1,10 +1,13 @@
-name: "Python CI"
+name: Python CI
 
 on:
   push:
     branches:
       - main
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   pre-commit:
@@ -27,7 +30,6 @@ jobs:
       python-version: ${{ matrix.python-version }}
 
   docs:
-    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
     permissions:
       contents: read
       pages: write
