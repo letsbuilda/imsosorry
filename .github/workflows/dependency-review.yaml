@@ -1,4 +1,4 @@
-name: 'Dependency Review'
+name: Dependency Review
 
 on: [ pull_request ]
 
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Checkout Repository'
+      - name: Checkout Repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - name: 'Dependency Review'
+      - name: Dependency Review
         uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4.8.2
         with:
           config-file: darbiadev/.github/.github/dependency-review-config.yaml@a5bf74504f1a843e026621c41517952fa3a09f81

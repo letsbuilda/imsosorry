@@ -1,0 +1,14 @@
+version: 2
+
+build:
+  os: ubuntu-lts-latest
+  tools:
+    python: "3"
+  jobs:
+      install:
+         - pip install --upgrade pip
+         - pip install --upgrade .
+         - pip install --group 'docs'
+
+sphinx:
+   configuration: docs/conf.py

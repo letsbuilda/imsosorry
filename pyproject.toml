@@ -8,22 +8,23 @@ authors = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = []
 
 [project.urls]
 repository = "https://github.com/letsbuilda/imsosorry/"
 documentation = "https://docs.letsbuilda.dev/imsosorry/"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "nox>=2025.5.1",
-    "pre-commit>=4.2.0",
+    "prek>=0.2.28",
     "ruff>=0.12.1",
     "mypy>=1.16.1",
 ]
 tests = [
     "pytest>=8.4.1",
+    "coverage>=7.13.1",
     "pytest-randomly>=3.16.0",
     "pytest-codspeed>=4.0.0",
 ]

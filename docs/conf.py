@@ -26,7 +26,7 @@ extensions = [
 ]
 
 autoapi_type: str = "python"
-autoapi_dirs: list[str] = ["../../src"]
+autoapi_dirs: list[str] = ["../src"]
 
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
