@@ -39,6 +39,9 @@ docs = [
 requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
+[tool.uv]
+required-version = ">=0.9.25"
+
 [tool.ruff]
 preview = true
 unsafe-fixes = true
