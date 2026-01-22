@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -48,7 +48,7 @@ jobs:
         run: uv run ty check .
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     strategy:
       fail-fast: false
       matrix:
@@ -90,7 +90,7 @@ jobs:
           if-no-files-found: error
 
   codecov:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: [test]
     if: ${{ always() }}
     permissions:
