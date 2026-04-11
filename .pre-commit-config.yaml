@@ -17,6 +17,11 @@ repos:
         args: [ --fix=lf ]
       - id: end-of-file-fixer
 
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: e99c5b43aa41681e83d439e6ebf3c82d7f3f6426  # frozen: 0.11.6
+    hooks:
+      - id: uv-lock
+
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: ea2eb407b4cbce87cf0d502f36578950494f5ac9  # frozen: v1.23.1
     hooks:
