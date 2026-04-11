@@ -1,19 +1,36 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "monthly"
+      interval: monthly
     groups:
       ci-dependencies:
         patterns:
           - "*"
+    cooldown:
+      default-days: 7
 
-  - package-ecosystem: "uv"
-    directory: "/"
+  - package-ecosystem: uv
+    directory: /
+    registries:
+      - python-cloudsmith
     schedule:
-      interval: "monthly"
+      interval: monthly
     groups:
       python-dependencies:
         patterns:
           - "*"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: pre-commit
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      pre-commit-dependencies:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
