@@ -13,8 +13,6 @@ updates:
 
   - package-ecosystem: uv
     directory: /
-    registries:
-      - python-cloudsmith
     schedule:
       interval: monthly
     groups:
