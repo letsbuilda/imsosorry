@@ -74,7 +74,7 @@ jobs:
         run: uv sync --group dev --group tests
 
       - name: Run tests with coverage
-        run: uv run python -m coverage run -m pytest -v --junitxml=junit.xml
+        run: uv run coverage run pytest -v --junitxml=junit.xml
 
       - name: Create coverage report
         run: uv run coverage xml -o coverage.xml
