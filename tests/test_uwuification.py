@@ -1,11 +1,11 @@
-"""Test the arts of Uwuification."""
+"""Test the uwuification."""
 
 from __future__ import annotations
 
 import pytest
 
-from imsosorry.uwuification import (
-    EMOJIS,
+from imsosorry.uwuification.constants import EMOJIS
+from imsosorry.uwuification.uwuifier import (
     char_replace,
     emoji,
     nyaify,
